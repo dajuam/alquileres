@@ -75,7 +75,7 @@ easy_admin:
             class: AppBundle\Entity\Alquiler
             controller: AppBundle\Controller\AlquilerController
             list:
-                fields: ['id', 'cliente', 'fechaInicio']
+                fields: ['id', 'cliente', 'fechaInicio', 'fechaFin', 'valorFinal']
             new:
                 fields:
                 - { property: 'cliente'}
