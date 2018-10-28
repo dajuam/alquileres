@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: [ "en" ] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -65,3 +65,24 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+easy_admin:
+    formats:
+        date: 'd/m/Y'
+    entities:
+        # change the following to the namespaces of your own entities
+        Alquiler:
+            class: AppBundle\Entity\Alquiler
+            controller: AppBundle\Controller\AlquilerController
+            list:
+                fields: ['id', 'cliente', 'fechaInicio']
+            new:
+                fields:
+                - { property: 'cliente'}
+                - { property: 'departamento'}
+                - { property: 'fechaInicio', type: 'date' }
+                - { property: 'fechaFin', type: 'date' }
+        Departamento:
+            class: AppBundle\Entity\Departamento
+        Cliente:
+            class: AppBundle\Entity\Cliente
