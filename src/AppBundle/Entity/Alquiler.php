@@ -18,16 +18,16 @@ class Alquiler
     protected $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="alquileres")
-    * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
-    */
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="alquileres")
+     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
+     */
     protected $cliente;
 
     /**
      * @ORM\Column(name="fecha_inicio", type="date")
      */
     protected $fechaInicio;
-    
+
     /**
      * @ORM\Column(name="fecha_fin", type="date")
      */
@@ -64,7 +64,6 @@ class Alquiler
     public function setCliente(\AppBundle\Entity\Cliente $cliente = null)
     {
         $this->cliente = $cliente;
-
         return $this;
     }
 
@@ -88,7 +87,6 @@ class Alquiler
     public function setFechaInicio($fechaInicio)
     {
         $this->fechaInicio = $fechaInicio;
-
         return $this;
     }
 
@@ -112,7 +110,6 @@ class Alquiler
     public function setFechaFin($fechaFin)
     {
         $this->fechaFin = $fechaFin;
-
         return $this;
     }
 
@@ -136,7 +133,6 @@ class Alquiler
     public function setValorFinal($valorFinal)
     {
         $this->valorFinal = $valorFinal;
-
         return $this;
     }
 
@@ -160,7 +156,6 @@ class Alquiler
     public function setDepartamento(\AppBundle\Entity\Departamento $departamento = null)
     {
         $this->departamento = $departamento;
-
         return $this;
     }
 
@@ -174,7 +169,9 @@ class Alquiler
         return $this->departamento;
     }
 
-    public function __toString() {
-        return $this->getId()->__toString();
+    public function __toString()
+    {
+        return $this->getCliente()->getNombre() . " - " . $this->getDepartamento()->getUbicacion() .
+            " / Desde: " . $this->getFechaInicio()->format("Y-m-d") . " Hasta: " . $this->getFechaFin()->format("Y-m-d");
     }
 }
