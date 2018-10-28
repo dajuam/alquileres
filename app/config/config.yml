@@ -86,3 +86,12 @@ easy_admin:
             class: AppBundle\Entity\Departamento
         Cliente:
             class: AppBundle\Entity\Cliente
+            new:
+                fields: ['nombre', 'email']
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false
