@@ -67,6 +67,7 @@ swiftmailer:
     spool: { type: memory }
 
 easy_admin:
+    site_name: 'Alquileres'
     formats:
         date: 'd/m/Y'
     entities:
