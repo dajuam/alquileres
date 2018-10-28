@@ -175,6 +175,6 @@ class Alquiler
     }
 
     public function __toString() {
-        return "sss";
+        return $this->getId()->__toString();
     }
 }

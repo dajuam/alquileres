@@ -137,6 +137,6 @@ class Departamento
     }
 
     public function __toString() {
-        return "ss";
+        return $this->getUbicacion();
     }
 }

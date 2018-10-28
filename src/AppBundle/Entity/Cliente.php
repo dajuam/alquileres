@@ -132,6 +132,6 @@ class Cliente
     }
 
     public function __toString() {
-        return "sss";
+        return $this->getNombre() . " / " . $this->getEmail();
     }
 }
