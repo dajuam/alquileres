@@ -2,8 +2,22 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Alquiler;
+use Doctrine\ORM\EntityManagerInterface;
+
 class AlquilerService
 {
+    private $em;
+    
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
+    public function esCliente($id) {
+        return $this->em->getRepository(Alquiler::class)->find($id);
+    }
+    
     public function calcularValor($alquiler) {
         //Preparo datos
         $inicio = $alquiler->getFechaInicio();
@@ -11,7 +25,7 @@ class AlquilerService
         $interval = date_diff($inicio, $fin);
         $cantidadDias = $interval->d;
         $precioPorDia = $alquiler->getDepartamento()->getValorNoche();
-        $alquileresCliente = $alquiler->getCliente()->getAlquileres();
+
         $valorFinal = $precioPorDia * $cantidadDias;
         
         // Calculo descuentos
@@ -24,11 +38,12 @@ class AlquilerService
                 $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
             }
         }
+
         // Descuento adicional por si ya alquilo alguna vez
-        if (empty($alquileresCliente))
-            $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
+        if ($this->esCliente($alquiler->getCliente()->getId()) != null)
+            $valorFinal = $valorFinal - ($valorFinal * 5) / 100;
             
-            return $valorFinal;
+        return $valorFinal;
     }
 }
 
