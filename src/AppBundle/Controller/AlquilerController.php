@@ -20,20 +20,16 @@ class AlquilerController extends BaseAdminController
         $valorFinal = $precioPorDia * $cantidadDias;
         if ($cantidadDias > 4) {
             // Aplica 5%
-            $descuento = ($valorFinal * 4) / 100;
-            $valorFinal = $valorFinal - $descuento;
+            $valorFinal = $valorFinal - ($valorFinal * 5) / 100;
         } else {
             if ($cantidadDias > 15) {
                 // Aplica 15%
-                $descuento = ($valorFinal * 15) / 100;
-                $valorFinal = $valorFinal - $descuento;
+                $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
             }
         }
         // Descuento adicional por si ya alquilo alguna vez
-        if (empty($alquileresCliente)) {
-            $descuento = ($valorFinal * 5) / 100;
-            $valorFinal = $valorFinal - $descuento;
-        }
+        if (empty($alquileresCliente))
+            $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
         $entity->setValorFinal($valorFinal);
         $this->em->persist($entity);
         $this->em->flush();
