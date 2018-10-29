@@ -70,6 +70,8 @@ easy_admin:
     site_name: 'Alquileres'
     formats:
         date: 'd/m/Y'
+    list:
+        actions: ['show', 'edit', 'delete']
     entities:
         # change the following to the namespaces of your own entities
         Alquiler:
@@ -79,12 +81,19 @@ easy_admin:
                 fields: ['id', 'cliente', 'fechaInicio', 'fechaFin', 'valorFinal']
             new:
                 fields:
-                - { property: 'cliente'}
-                - { property: 'departamento'}
-                - { property: 'fechaInicio', type: 'date' }
-                - { property: 'fechaFin', type: 'date' }
+                - { property: 'cliente', type_options: { required: true }}
+                - { property: 'departamento', type_options: { required: true }}
+                - { property: 'fechaInicio', type: 'date', type_options: { widget: 'single_text' }}
+                - { property: 'fechaFin', type: 'date', type_options: { widget: 'single_text' }}
         Departamento:
             class: AppBundle\Entity\Departamento
+            new:
+                fields:
+                - { property: 'ubicacion'}
+                - { property: 'cantidadAmbientes'}
+                - { property: 'metrosCuadrados'}
+                - { property: 'valorNoche', type: 'money', type_options: { currency: 'USD' }}
+                - { property: 'valorMensual', type: 'money', type_options: { currency: 'USD' }}
         Cliente:
             class: AppBundle\Entity\Cliente
             new:
