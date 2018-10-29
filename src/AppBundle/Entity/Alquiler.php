@@ -172,6 +172,6 @@ class Alquiler
     public function __toString()
     {
         return $this->getCliente()->getNombre() . " - " . $this->getDepartamento()->getUbicacion() .
-            " / Desde: " . $this->getFechaInicio()->format("Y-m-d") . " Hasta: " . $this->getFechaFin()->format("Y-m-d");
+            " / Desde: " . $this->getFechaInicio()->format("d/m/Y") . " Hasta: " . $this->getFechaFin()->format("d/m/Y");
     }
 }
