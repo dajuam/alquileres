@@ -26,13 +26,14 @@ MySQL > 5
 4. composer install
 5. Completar los parámetros para la conexión
 6. bin/console doctrine:migrations:migrate
-7. bin/console assets:install --symlink
-8. bin/console server:start
-9. Browsear http://127.0.0.1:8000/alquileres/
+7. bin/console doctrine:fixtures:load
+8. bin/console assets:install --symlink
+9. bin/console server:start
+10. Browsear http://127.0.0.1:8000/alquileres/
 ```
 
 ## Cómo correr los tests
 
 ```
-./vendor/bin/phpunit tests/AppBundle/Service/AlquilerServiceTest.php
+./vendor/bin/simple-phpunit tests/AppBundle/Service/AlquilerServiceTest.php
 ```
