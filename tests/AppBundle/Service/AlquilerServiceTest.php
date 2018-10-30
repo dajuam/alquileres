@@ -32,19 +32,30 @@ final class AlquilerServiceTest extends KernelTestCase
         return $alquiler;
     }
 
+    private function getDepartamento() {
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->entityManager
+            ->getRepository(Departamento::class)
+            ->findOneBy(array("ubicacion" => "Lavalle 400"));
+        return $departamento;
+    }
+
+    private function getCliente($contacto) {
+        $cliente = $this->entityManager
+            ->getRepository(Cliente::class)
+            ->findOneBy(array("email" => $contacto));
+        return $cliente;
+    }
+
     public function testMenorACuatroDias()
     {
         $alquilerService = $this->container->get(AlquilerService::class);
 
         // Maria no tiene alquileres
-        $cliente = $this->entityManager
-            ->getRepository(Cliente::class)
-            ->find(2);
+        $cliente = $this->getCliente("maria@gmail.com");
 
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-            ->getRepository(Departamento::class)
-            ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
 
         $alquiler = $this->createAlquiler($cliente, $departamento, 3);
         
@@ -57,14 +68,10 @@ final class AlquilerServiceTest extends KernelTestCase
         $alquilerService = $this->container->get(AlquilerService::class);
         
         // Maria no tiene alquileres
-        $cliente = $this->entityManager
-        ->getRepository(Cliente::class)
-        ->find(2);
+        $cliente = $this->getCliente("maria@gmail.com");
         
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-        ->getRepository(Departamento::class)
-        ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
         
         $alquiler = $this->createAlquiler($cliente, $departamento, 8);
         
@@ -77,14 +84,10 @@ final class AlquilerServiceTest extends KernelTestCase
         $alquilerService = $this->container->get(AlquilerService::class);
         
         // Maria no tiene alquileres
-        $cliente = $this->entityManager
-            ->getRepository(Cliente::class)
-            ->find(2);
+        $cliente = $this->getCliente("maria@gmail.com");
         
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-            ->getRepository(Departamento::class)
-            ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
         
         $alquiler = $this->createAlquiler($cliente, $departamento, 18);
         
@@ -96,15 +99,11 @@ final class AlquilerServiceTest extends KernelTestCase
     {
         $alquilerService = $this->container->get(AlquilerService::class);
         
-        // Juan tiene un alquiler
-        $cliente = $this->entityManager
-            ->getRepository(Cliente::class)
-            ->find(1);
+        // Juan es cliente
+        $cliente = $this->getCliente("juan@gmail.com");
         
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-            ->getRepository(Departamento::class)
-            ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
         
         $alquiler = $this->createAlquiler($cliente, $departamento, 4);
         
@@ -116,15 +115,11 @@ final class AlquilerServiceTest extends KernelTestCase
     {
         $alquilerService = $this->container->get(AlquilerService::class);
         
-        // Juan tiene alquiler
-        $cliente = $this->entityManager
-        ->getRepository(Cliente::class)
-        ->find(1);
+        // Juan es cliente
+        $cliente = $this->getCliente("juan@gmail.com");
         
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-        ->getRepository(Departamento::class)
-        ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
         
         $alquiler = $this->createAlquiler($cliente, $departamento, 8);
         
@@ -138,14 +133,10 @@ final class AlquilerServiceTest extends KernelTestCase
         $alquilerService = $this->container->get(AlquilerService::class);
         
         // Juan es cliente
-        $cliente = $this->entityManager
-        ->getRepository(Cliente::class)
-        ->find(1);
+        $cliente = $this->getCliente("juan@gmail.com");
         
-        // Alquila departamento 2 que sale 2000 por noche
-        $departamento = $this->entityManager
-        ->getRepository(Departamento::class)
-        ->find(2);
+        // Alquila departamento que sale 2000 por noche
+        $departamento = $this->getDepartamento();
         
         $alquiler = $this->createAlquiler($cliente, $departamento, 18);
         
