@@ -18,7 +18,7 @@ class Alquiler
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="alquileres")
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="alquileres", cascade={"persist"})
      * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
      */
     protected $cliente;
@@ -39,7 +39,7 @@ class Alquiler
     protected $valorFinal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Departamento")
+     * @ORM\ManyToOne(targetEntity="Departamento", cascade={"persist"})
      * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
      */
     protected $departamento;
