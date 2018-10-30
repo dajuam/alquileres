@@ -14,8 +14,8 @@ class AlquilerService
         $this->em = $em;
     }
 
-    public function esCliente($id) {
-        return $this->em->getRepository(Alquiler::class)->find($id);
+    public function esClienteBy($id) {
+        return $this->em->getRepository(Alquiler::class)->findBy(array('cliente' => $id));
     }
     
     public function calcularValor($alquiler) {
@@ -29,19 +29,18 @@ class AlquilerService
         $valorFinal = $precioPorDia * $cantidadDias;
         
         // Calculo descuentos
-        if ($cantidadDias > 4) {
+        if ($cantidadDias > 4 && $cantidadDias <= 15) {
             // Aplica 5%
             $valorFinal = $valorFinal - ($valorFinal * 5) / 100;
-        } else {
-            if ($cantidadDias > 15) {
-                // Aplica 15%
-                $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
-            }
+        } elseif ($cantidadDias > 15) {
+            // Aplica 15%
+            $valorFinal = $valorFinal - ($valorFinal * 15) / 100;
         }
 
         // Descuento adicional por si ya alquilo alguna vez
-        if ($this->esCliente($alquiler->getCliente()->getId()) != null)
+        if ($this->esClienteBy($alquiler->getCliente()->getId()) != null) {
             $valorFinal = $valorFinal - ($valorFinal * 5) / 100;
+        }
             
         return $valorFinal;
     }
