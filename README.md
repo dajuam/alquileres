@@ -33,4 +33,6 @@ MySQL > 5
 
 ## Cómo correr los tests
 
-...
+```
+./vendor/bin/phpunit tests/AppBundle/Service/AlquilerServiceTest.php
+```
